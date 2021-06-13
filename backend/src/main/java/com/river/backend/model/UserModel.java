@@ -1,17 +1,21 @@
 package com.river.backend.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
 public class UserModel {
 
     @Id
-    String username;
-    String name;
-    String password;
-    String rollNumber;
-    String branch;
+    private String username;
+    private String name;
+    private String password;
+    private String rollNumber;
+    private String branch;
+
+    @OneToMany(mappedBy = "authorId", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST,CascadeType.REFRESH})
+    private List<QuestionModel> questions;
 
 
     public UserModel(){}
@@ -65,6 +69,14 @@ public class UserModel {
 
     public void setBranch(String branch) {
         this.branch = branch;
+    }
+
+    public List<QuestionModel> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<QuestionModel> questions) {
+        this.questions = questions;
     }
 
     @Override

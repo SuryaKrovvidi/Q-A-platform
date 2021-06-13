@@ -7,26 +7,25 @@ import java.util.Date;
 @Entity
 public class QuestionModel {
 
+    //ID, authorId, description
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
-    String description;
+    private String description;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "username")
-    UserModel userModel;
+//    @ManyToOne (cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST,CascadeType.REFRESH})
+//    @JoinColumn(name = "username")
+//    UserModel userModel;
+    private String authorId;
+
+    public QuestionModel(String description, String authorId) {
+        this.description = description;
+        this.authorId = authorId;
+    }
 
     public QuestionModel() {
-    }
-
-    public QuestionModel(String description, UserModel userModel) {
-        this.description = description;
-        this.userModel = userModel;
-    }
-
-    public QuestionModel(String description) {
-        this.description = description;
     }
 
     public Long getId() {
@@ -45,20 +44,11 @@ public class QuestionModel {
         this.description = description;
     }
 
-    public UserModel getUserModel() {
-        return userModel;
+    public String getAuthorId() {
+        return authorId;
     }
 
-    public void setUserModel(UserModel userModel) {
-        this.userModel = userModel;
-    }
-
-    @Override
-    public String toString() {
-        return "QuestionModel{" +
-                "id=" + id +
-                ", Description='" + description + '\'' +
-                ", userModel=" + userModel +
-                '}';
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
     }
 }

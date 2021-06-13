@@ -8,15 +8,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/questions")
 public class QuestionController {
     @Autowired
     QuestionService questionService;
 
-    @PostMapping(value = "/{username}")
-    ResponseEntity<Boolean> addQuestion(@RequestBody QuestionModel questionModel, @PathVariable(name = "username") String username){
-        System.out.println(questionModel.getDescription());
-        return questionService.addQuestion(questionModel, username);
+    @GetMapping(value = "/{username}")
+    ResponseEntity<List<QuestionModel>> getQuestions(@PathVariable(name = "username") String username){
+        return questionService.getQuestions(username);
     }
+
+    @PostMapping(value = "/")
+    ResponseEntity<Boolean> addQuestion(@RequestBody QuestionModel questionModel){
+        System.out.println(questionModel.toString());
+        return questionService.addQuestion(questionModel);
+    }
+
+
 }
