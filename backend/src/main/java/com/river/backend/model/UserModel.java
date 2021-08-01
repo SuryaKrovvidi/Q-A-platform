@@ -17,6 +17,9 @@ public class UserModel {
     @OneToMany(mappedBy = "authorId", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST,CascadeType.REFRESH})
     private List<QuestionModel> questions;
 
+    @OneToMany(mappedBy = "authorId", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST,CascadeType.REFRESH})
+    private List<AnswerModel> answers;
+
 
     public UserModel(){}
 
@@ -77,6 +80,14 @@ public class UserModel {
 
     public void setQuestions(List<QuestionModel> questions) {
         this.questions = questions;
+    }
+
+    public List<AnswerModel> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<AnswerModel> answers) {
+        this.answers = answers;
     }
 
     @Override

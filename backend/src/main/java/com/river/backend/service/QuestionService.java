@@ -33,4 +33,11 @@ public class QuestionService {
         List<QuestionModel> questions = currentUser.getQuestions();
         return new ResponseEntity<>(questions, HttpStatus.OK);
     }
+
+    public ResponseEntity<List<QuestionModel>> getAllQuestions(){
+        List<QuestionModel> questions = questionModelDao.findAll();
+        return new ResponseEntity<>(questions, HttpStatus.OK);
+    }
+
+
 }

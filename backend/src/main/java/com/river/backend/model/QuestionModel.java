@@ -2,6 +2,7 @@ package com.river.backend.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -15,10 +16,11 @@ public class QuestionModel {
 
     private String description;
 
-//    @ManyToOne (cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST,CascadeType.REFRESH})
-//    @JoinColumn(name = "username")
-//    UserModel userModel;
+
     private String authorId;
+
+    @OneToMany(mappedBy = "questionId", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST,CascadeType.REFRESH})
+    private List<AnswerModel> answers;
 
     public QuestionModel(String description, String authorId) {
         this.description = description;
@@ -50,5 +52,13 @@ public class QuestionModel {
 
     public void setAuthorId(String authorId) {
         this.authorId = authorId;
+    }
+
+    public List<AnswerModel> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<AnswerModel> answers) {
+        this.answers = answers;
     }
 }

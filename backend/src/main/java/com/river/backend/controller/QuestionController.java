@@ -16,6 +16,11 @@ public class QuestionController {
     @Autowired
     QuestionService questionService;
 
+    @GetMapping(value = "/")
+    ResponseEntity<List<QuestionModel>> getAllQuestions(){
+        return questionService.getAllQuestions();
+    }
+
     @GetMapping(value = "/{username}")
     ResponseEntity<List<QuestionModel>> getQuestions(@PathVariable(name = "username") String username){
         return questionService.getQuestions(username);
